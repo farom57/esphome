@@ -4,6 +4,7 @@
 #include "esphome/components/uart/uart.h"
 #include "esphome/components/climate/climate.h"
 #include "esphome/components/sensor/sensor.h"
+#include "esphome/components/binary_sensor/binary_sensor.h"
 
 namespace esphome {
 namespace hitachi_hlink {
@@ -136,8 +137,7 @@ class HitachiClimate : public climate::Climate, public PollingComponent, public 
   void set_filter_sensor(binary_sensor::BinarySensor *sens) {
     filter_sensor = sens;)
 
-  void set_period(uint32_t ms){ this->period_ = ms};
-    void set_response_timeout(uint32_t ms){this->timeout_ = ms};
+  void set_response_timeout(uint32_t ms){this->timeout_ = ms};
     void set_beeper_feedback(bool state){this->beeper_ = state};
 
    protected:
@@ -170,7 +170,6 @@ class HitachiClimate : public climate::Climate, public PollingComponent, public 
     uint8_t retry_;    // number of retry
 
     uint32_t timeout_ = 500;
-    uint32_t period_ = 30000;
     bool beeper_ = true;
 
     // tell the receiver if their is pending read or set operation.
