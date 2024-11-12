@@ -142,8 +142,8 @@ class HitachiClimate : public climate::Climate, public PollingComponent, public 
   void set_outdoor_temperature_sensor(sensor::Sensor *sens) { outside_temp_sensor = sens; }
   void set_filter_sensor(binary_sensor::BinarySensor *sens) { filter_sensor = sens; }
 
-  void set_response_timeout(uint32_t ms){this->timeout_ = ms};
-  void set_beeper_feedback(bool state){this->beeper_ = state};
+  void set_response_timeout(uint32_t ms) { this->timeout_ = ms; };
+  void set_beeper_feedback(bool state) { this->beeper_ = state; };
 
  protected:
   sensor::Sensor *outside_temp_sensor;
