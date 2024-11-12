@@ -16,7 +16,7 @@ from esphome.const import (
 )
 
 CODEOWNERS = ["@farom57"]
-DEPENDENCIES = ["climate", "uart"]
+DEPENDENCIES = ["climate", "uart", "sensor", "binary_sensor"]
 
 hitachi_hlink_ns = cg.esphome_ns.namespace("hitachi_hlink")
 
