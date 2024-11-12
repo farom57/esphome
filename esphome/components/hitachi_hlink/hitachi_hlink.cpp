@@ -477,7 +477,9 @@ bool HitachiClimate::climate2state_() {
     state_[SPEED].u8 = 0;
   }
 
-  if (target_temperature <= 32. && target_temperature >= 16.) {
+  if (isnan(target_temperature)) {
+    state_[TARGET].u16 = 23;
+  } else if (target_temperature <= 32. && target_temperature >= 16.) {
     state_[TARGET].u16 = (uint16_t) target_temperature;
   } else {
     ESP_LOGW(TAG, "Incorrect temperature: %f", target_temperature);
@@ -565,6 +567,8 @@ bool HitachiClimate::state2climate_() {
   // outdoor temperature
   if (state_[OUTDOOR].u8 < 50) {
     outside_temperature = state_[OUTDOOR].u8;
+  } else if (state_[OUTDOOR].u8 == 126) {
+    ESP_LOGW(TAG, "Outdoor temperature not available");
   } else {
     ESP_LOGW(TAG, "Invalid outdoor temperature %d (0x%02X)", state_[OUTDOOR].u8, state_[OUTDOOR].u8);
     return false;
