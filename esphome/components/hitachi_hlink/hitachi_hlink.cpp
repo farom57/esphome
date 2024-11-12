@@ -101,7 +101,7 @@ void HitachiClimate::loop() {
     case RECEIVING_READ:  // write incoming data in buf_
     {
       // detect timeout
-      if (start_receive_ + TIMEOUT < millis()) {
+      if (start_receive_ + timeout_ < millis()) {
         ESP_LOGW(TAG, "Receive timeout");
         receiver_ = FAILED_READ;
         break;
@@ -132,7 +132,7 @@ void HitachiClimate::loop() {
     case RECEIVING_SET:  // write incoming data in buf_
     {
       // detect timeout
-      if (start_receive_ + TIMEOUT < millis()) {
+      if (start_receive_ + timeout_ < millis()) {
         ESP_LOGW(TAG, "Receive timeout");
         receiver_ = FAILED_SET;
         break;
