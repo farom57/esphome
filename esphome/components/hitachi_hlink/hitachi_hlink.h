@@ -58,11 +58,9 @@ const ParamDescriptor descr[N_PARAMS] = {
     {0x0003, 4, true, true, "Target termperature in °C"},  // 0003-RW: Target termperature in °C
     {0x0005, 2, true, false, "unknown, always 0x7E=0b01111110"},  // 0005-RO: unknown, always 0x7E=0b01111110
     {0x0006, 2, true, false,
-     "Control via remote control permission, 00 = all settings allowed 01 = all"},  // 0006-RO: Control via remote
-                                                                                    // control permission, 00 = all
-                                                                                    // settings allowed 01 = all
-                                                                                    // settings prohibited (not tested
-                                                                                    // !)
+     "Control via remote permission, 00 = allow 01 = no"},  // 0006-RO: Control via remote control permission, 00 = all
+                                                            // settings allowed 01 = all settings prohibited (not tested
+                                                            // !)
     {0x0007, 2, true, true,
      "unknown, always 00, maybe for swing mode"},                   // 0007-RW: unknown, always 00, maybe for swing mode
     {0x0008, 2, true, false, "unknown, always 00"},                 // 0008-RO: unknown, always 00
