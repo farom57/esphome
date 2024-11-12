@@ -4,8 +4,12 @@
 #include "esphome/components/uart/uart.h"
 #include "esphome/components/climate/climate.h"
 
-#include "esphome/components/sensor/sensor.h"
+#ifdef USE_BINARY_SENSOR
 #include "esphome/components/binary_sensor/binary_sensor.h"
+#endif
+#ifdef USE_SENSOR
+#include "esphome/components/sensor/sensor.h"
+#endif
 
 namespace esphome {
 namespace hitachi_hlink {
