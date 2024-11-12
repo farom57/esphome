@@ -53,29 +53,38 @@ const ParamDescriptor descr[N_PARAMS] = {
     {0x0000, 2, true, true, "Power state 0=OFF 1=ON"},  // 0000-RW: Power state 0=OFF 1=ON
     {0x0001, 4, true, true, "Operation mode 0010=hot 0020=dry 0040=cool 0050=fan 8000=auto"},
     // 0001-RW: Operation mode 0x0010=hot 0x0020=dry 0x0040=cool 0x0050=fan 0x8000=auto
-    {0x0002, 2, true, true, ""},   // 0002-RW: Fan speed 0=auto 1=high 2=medium 3=low 4=Silent
-    {0x0003, 4, true, true, ""},   // 0003-RW: Target termperature in °C
-    {0x0005, 2, true, false, ""},  // 0005-RO: unknown, always 0x7E=0b01111110
-    {0x0006, 2, true, false, ""},  // 0006-RO: Control via remote control permission, 00 = all settings allowed 01 = all
-                                   // settings prohibited (not tested !)
-    {0x0007, 2, true, true, ""},   // 0007-RW: unknown, always 00, maybe for swing mode
-    {0x0008, 2, true, false, ""},  // 0008-RO: unknown, always 00
-    {0x0009, 2, true, false, ""},  // 0009-RO: unknown, always 00
-    {0x000A, 2, true, false, ""},  // 000A-RO: unknown, always 00
-    {0x0011, 2, true, false, ""},  // 0011-RO: unknown, always FF
-    {0x0012, 2, true, false, ""},  // 0012-RO: unknown, always FF
-    {0x0013, 2, true, false, ""},  // 0013-RO: unknown, always 03
-    {0x0014, 2, true, false, ""},  // 0014-RO: unknown, always 00
-    {0x0100, 2, true, false, ""},  // 0100-RO: Current indoor temperature in °C
-    {0x0101, 2, true, false, ""},  // 0101-RO: unknown, always 0x7E=0b01111110
-    {0x0102, 2, true, false, ""},  // 0102-RO: Current outdoor temperature in °C
-    {0x0201, 4, true, false, ""},  // 0201-RO: unknown, always 0000
-    {0x0300, 4, false, true, ""},  // 0300-WO: unknown, write only, 0000=normal 0040=absence
-    {0x0301, 4, true, false, ""},  // 0301-RO: Active status 0000=Stand-by FFFF=Active
-    {0x0302, 2, true, false, ""},  // 0302-RO: Filter status 0=OK 1=BAD
-    {0x0304, 8, true, false, ""},  // 0304-RO: Absence 0=disabled 80=activated
-    {0x0800, 2, false, true, ""},  // 0800-WO: Beep (TBC), write only, 00=no beep 07=beep
-    {0x0900, 20, true, false, ""},  // 0900-RO: model, always 5241442D323551504220 for me --> RAD-25QPB in ascii
+    {0x0002, 2, true, true,
+     "Fan speed 0=auto 1=high 2=medium 3=low 4=Silent"},   // 0002-RW: Fan speed 0=auto 1=high 2=medium 3=low 4=Silent
+    {0x0003, 4, true, true, "Target termperature in °C"},  // 0003-RW: Target termperature in °C
+    {0x0005, 2, true, false, "unknown, always 0x7E=0b01111110"},  // 0005-RO: unknown, always 0x7E=0b01111110
+    {0x0006, 2, true, false,
+     "Control via remote control permission, 00 = all settings allowed 01 = all"},  // 0006-RO: Control via remote
+                                                                                    // control permission, 00 = all
+                                                                                    // settings allowed 01 = all
+                                                                                    // settings prohibited (not tested
+                                                                                    // !)
+    {0x0007, 2, true, true,
+     "unknown, always 00, maybe for swing mode"},                   // 0007-RW: unknown, always 00, maybe for swing mode
+    {0x0008, 2, true, false, "unknown, always 00"},                 // 0008-RO: unknown, always 00
+    {0x0009, 2, true, false, "unknown, always 00"},                 // 0009-RO: unknown, always 00
+    {0x000A, 2, true, false, "unknown, always 00"},                 // 000A-RO: unknown, always 00
+    {0x0011, 2, true, false, "unknown, always FF"},                 // 0011-RO: unknown, always FF
+    {0x0012, 2, true, false, "unknown, always FF"},                 // 0012-RO: unknown, always FF
+    {0x0013, 2, true, false, "unknown, always 03"},                 // 0013-RO: unknown, always 03
+    {0x0014, 2, true, false, "unknown, always 00"},                 // 0014-RO: unknown, always 00
+    {0x0100, 2, true, false, "Current indoor temperature in °C"},   // 0100-RO: Current indoor temperature in °C
+    {0x0101, 2, true, false, "unknown, always 0x7E=0b01111110"},    // 0101-RO: unknown, always 0x7E=0b01111110
+    {0x0102, 2, true, false, "Current outdoor temperature in °C"},  // 0102-RO: Current outdoor temperature in °C
+    {0x0201, 4, true, false, "unknown, always 0000"},               // 0201-RO: unknown, always 0000
+    {0x0300, 4, false, true,
+     "unknown, write only, 0000=normal 0040=absence"},  // 0300-WO: unknown, write only, 0000=normal 0040=absence
+    {0x0301, 4, true, false,
+     "Active status 0000=Stand-by FFFF=Active"},                  // 0301-RO: Active status 0000=Stand-by FFFF=Active
+    {0x0302, 2, true, false, "Filter status 0=OK 1=BAD"},         // 0302-RO: Filter status 0=OK 1=BAD
+    {0x0304, 8, true, false, "Absence 0=disabled 80=activated"},  // 0304-RO: Absence 0=disabled 80=activated
+    {0x0800, 2, false, true,
+     "Beep (TBC), write only, 00=no beep 07=beep"},  // 0800-WO: Beep (TBC), write only, 00=no beep 07=beep
+    {0x0900, 20, true, false, "Model"},  // 0900-RO: model, always 5241442D323551504220 for me --> RAD-25QPB in ascii
 };
 
 enum ParamLabels {
