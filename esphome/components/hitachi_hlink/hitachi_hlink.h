@@ -140,71 +140,70 @@ class HitachiClimate : public climate::Climate, public PollingComponent, public 
   float get_setup_priority() const override { return esphome::setup_priority::DATA; }
 
   void set_outdoor_temperature_sensor(sensor::Sensor *sens) { outside_temp_sensor = sens; }
-  void set_filter_sensor(binary_sensor::BinarySensor *sens) {
-    filter_sensor = sens;)
+  void set_filter_sensor(binary_sensor::BinarySensor *sens) { filter_sensor = sens; }
 
   void set_response_timeout(uint32_t ms){this->timeout_ = ms};
-    void set_beeper_feedback(bool state){this->beeper_ = state};
+  void set_beeper_feedback(bool state){this->beeper_ = state};
 
-   protected:
-    sensor::Sensor *outside_temp_sensor;
-    binary_sensor::BinarySensor *filter_sensor;
-    float outside_temperature;
+ protected:
+  sensor::Sensor *outside_temp_sensor;
+  binary_sensor::BinarySensor *filter_sensor;
+  float outside_temperature;
 
-    ParamData state_[N_PARAMS];
-    char model_[11] = {0};
-    bool ready_ = false;  // remains false until the state of the AC has been acquired
+  ParamData state_[N_PARAMS];
+  char model_[11] = {0};
+  bool ready_ = false;  // remains false until the state of the AC has been acquired
 
-    // receive buffer
-    char buf_[MAX_LENGTH];
-    uint8_t buf_index_ = 0;
-    uint32_t start_receive_;
+  // receive buffer
+  char buf_[MAX_LENGTH];
+  uint8_t buf_index_ = 0;
+  uint32_t start_receive_;
 
-    // receiver state
-    enum ReceiverOperation {
-      OFF,
-      SENDING_READ,
-      SENDING_SET,
-      RECEIVING_READ,
-      RECEIVING_SET,
-      READ_COMPLETE,
-      SET_COMPLETE,
-      FAILED_READ,
-      FAILED_SET
-    } receiver_{OFF};
-    uint8_t current_;  // parameter currently read
-    uint8_t retry_;    // number of retry
+  // receiver state
+  enum ReceiverOperation {
+    OFF,
+    SENDING_READ,
+    SENDING_SET,
+    RECEIVING_READ,
+    RECEIVING_SET,
+    READ_COMPLETE,
+    SET_COMPLETE,
+    FAILED_READ,
+    FAILED_SET
+  } receiver_{OFF};
+  uint8_t current_;  // parameter currently read
+  uint8_t retry_;    // number of retry
 
-    uint32_t timeout_ = 500;
-    bool beeper_ = true;
+  uint32_t timeout_ = 500;
+  bool beeper_ = true;
 
-    // tell the receiver if their is pending read or set operation.
-    // Set operation takes the priority over read after the current parameter is completed
-    bool pending_read_ = false;
-    bool pending_set_ = false;
+  // tell the receiver if their is pending read or set operation.
+  // Set operation takes the priority over read after the current parameter is completed
+  bool pending_read_ = false;
+  bool pending_set_ = false;
 
-    // Send the command to read the current_ parameter
-    void send_read_cmd();
-    // Send the command to set the current_ parameter
-    void send_set_cmd();
+  // Send the command to read the current_ parameter
+  void send_read_cmd();
+  // Send the command to set the current_ parameter
+  void send_set_cmd();
 
-    /** convert an  hexadecimal char array to array
-     *
-     * Convert an array of len hexadecimal char to an array of len/2 bytes, return false in case of incorrect formating
-     */
-    bool hex2byte(char *buf, uint16_t len, uint8_t *out);
+  /** convert an  hexadecimal char array to array
+   *
+   * Convert an array of len hexadecimal char to an array of len/2 bytes, return false in case of incorrect formating
+   */
+  bool hex2byte(char *buf, uint16_t len, uint8_t *out);
 
-    /// compute the checksum of a byte array
-    uint16_t checksum_(uint8_t * in, uint8_t len);
+  /// compute the checksum of a byte array
+  uint16_t checksum_(uint8_t *in, uint8_t len);
 
-    /// print the state_
-    void print_state();
+  /// print the state_
+  void print_state();
 
-    /// convert state_ to Climate members, return false in case of invalid value
-    bool climate2state_();
+  /// convert state_ to Climate members, return false in case of invalid value
+  bool climate2state_();
 
-    /// convert Climate members to state_, return false in case of invalid value
-    bool state2climate_();
-  };
+  /// convert Climate members to state_, return false in case of invalid value
+  bool state2climate_();
+};
 }  // namespace hitachi_hlink
 }  // namespace esphome
