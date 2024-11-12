@@ -1,4 +1,4 @@
-#include "hitachi.h"
+#include "hitachi_hlink.h"
 #include "esphome/core/log.h"
 #include "esphome.h"
 
