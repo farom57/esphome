@@ -270,7 +270,8 @@ void HitachiClimate::loop() {
           if (outside_temp_sensor != nullptr &&
               (!outside_temp_sensor->has_state() || outside_temp_sensor->get_raw_state() != outside_temperature))
             outside_temp_sensor->publish_state(outside_temperature);
-          if (filter_ != nullptr && (!filter_->has_state() || filter_->get_raw_state() != filter_dirty))
+          if (filter_sensor != nullptr &&
+              (!filter_sensor->has_state() || filter_sensor->get_raw_state() != filter_dirty))
             filter_sensor->publish_state(filter_dirty);
         }
       }
