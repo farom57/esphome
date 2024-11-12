@@ -46,15 +46,13 @@ struct ParamDescriptor {
   const uint8_t length;  // number of hexadecimal characters
   const bool readable;
   const bool writable;
-  const string description;
+  const char description[65];
 };
 
 const ParamDescriptor descr[N_PARAMS] = {
     {0x0000, 2, true, true, "Power state 0=OFF 1=ON"},  // 0000-RW: Power state 0=OFF 1=ON
-    {0x0001, 4, true, true,
-     "Operation mode 0x0010=hot 0x0020=dry 0x0040=cool 0x0050=fan 0x8000=auto"},  // 0001-RW: Operation mode 0x0010=hot
-                                                                                  // 0x0020=dry 0x0040=cool 0x0050=fan
-                                                                                  // 0x8000=auto
+    {0x0001, 4, true, true, "Operation mode 0010=hot 0020=dry 0040=cool 0050=fan 8000=auto"},
+    // 0001-RW: Operation mode 0x0010=hot 0x0020=dry 0x0040=cool 0x0050=fan 0x8000=auto
     {0x0002, 2, true, true, ""},   // 0002-RW: Fan speed 0=auto 1=high 2=medium 3=low 4=Silent
     {0x0003, 4, true, true, ""},   // 0003-RW: Target termperature in °C
     {0x0005, 2, true, false, ""},  // 0005-RO: unknown, always 0x7E=0b01111110
