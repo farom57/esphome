@@ -191,7 +191,7 @@ void HitachiClimate::loop() {
 
     case READ_COMPLETE:  // process stored data
     {
-      ESP_LOGV(TAG, "Frame received, buf_index_=%d buf_=%.64s", buf_index_, buf_);
+      ESP_LOGVV(TAG, "Frame received, buf_index_=%d buf_=%.64s", buf_index_, buf_);
 
       // The expected answer is in the form "OK P=[data] C=[checksum]"
 
@@ -276,7 +276,7 @@ void HitachiClimate::loop() {
 
     case SET_COMPLETE:  // process stored data
     {
-      ESP_LOGV(TAG, "Frame received, buf_index_=%d buf_=%.64s", buf_index_, buf_);
+      ESP_LOGVV(TAG, "Frame received, buf_index_=%d buf_=%.64s", buf_index_, buf_);
 
       // The expected answer is in the form "OK"
 
@@ -339,7 +339,7 @@ void HitachiClimate::send_read_cmd() {
   uint16_t chksum = checksum_(address_bytes, 2);
   snprintf(msg, MAX_LENGTH, "MT P=%04X C=%04X\r", address, chksum);
   this->write_str(msg);
-  ESP_LOGV(TAG, "Sent MT P=%04X C=%04X\\r", address, chksum);
+  ESP_LOGVV(TAG, "Sent MT P=%04X C=%04X\\r", address, chksum);
 }
 
 // Send the command to set a paramater
@@ -382,7 +382,7 @@ void HitachiClimate::send_set_cmd() {
   uint16_t chksum = checksum_(data_bytes, data_bytes_len);
   snprintf(msg, MAX_LENGTH, "ST P=%04X,%s C=%04X\r", address, value_str, chksum);
   this->write_str(msg);
-  ESP_LOGV(TAG, "Sent ST P=%04X,%s C=%04X", address, value_str, chksum);
+  ESP_LOGVV(TAG, "Sent ST P=%04X,%s C=%04X", address, value_str, chksum);
 }
 
 /// compute the checksum of a byte array
