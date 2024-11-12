@@ -16,7 +16,7 @@ void HitachiClimate::setup() {
   // initialize write only parameters, other writtable parameters will be initialize at the first read when ready_
   // become true
   state_[ABSENCE_SET].u16 = 0x0000;
-  state_[BEEP].u8 = 0x07;
+  state_[BEEP].u8 = (beeper_ ? 0x07 : 0x00);
 
   model_[0] = 0;
   state_[MODEL].text = model_;
@@ -267,7 +267,11 @@ void HitachiClimate::loop() {
         pending_read_ = false;
         if (state2climate_()) {
           publish_state();
-          outside_temp_sensor->publish_state(outside_temperature);
+          if (outside_temp_sensor != nullptr &&
+              (!outside_temp_sensor->has_state() || outside_temp_sensor->get_raw_state() != outside_temperature))
+            outside_temp_sensor->publish_state(outside_temperature);
+          if (filter_ != nullptr && (!filter_->has_state() || filter_->get_raw_state() != filter_dirty))
+            filter_sensor->publish_state(filter_dirty);
         }
       }
 
@@ -485,6 +489,9 @@ bool HitachiClimate::climate2state_() {
     ESP_LOGW(TAG, "Incorrect temperature: %f", target_temperature);
     return false;
   }
+
+  state_[BEEP].u8 = (beeper_ ? 0x07 : 0x00);
+
   return true;
 }
 
@@ -603,6 +610,9 @@ bool HitachiClimate::state2climate_() {
       ESP_LOGW(TAG, "Unknown fan speed value %02X", state_[SPEED].u8);
       return false;
   }
+
+  filter_dirty = (bool) state_[FILTER].u8;
+
   return true;
 }
 

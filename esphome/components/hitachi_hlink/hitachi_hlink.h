@@ -177,6 +177,8 @@ class HitachiClimate : public climate::Climate, public PollingComponent, public 
   uint32_t timeout_ = 500;
   bool beeper_ = true;
 
+  bool filter_dirty = false;
+
   // tell the receiver if their is pending read or set operation.
   // Set operation takes the priority over read after the current parameter is completed
   bool pending_read_ = false;
