@@ -5,7 +5,7 @@
 #include "esphome/components/climate/climate.h"
 
 #include "esphome/components/sensor/sensor.h"
-#include "esphome/components/sensor/binary_sensor.h"
+#include "esphome/components/binary_sensor/binary_sensor.h"
 
 namespace esphome {
 namespace hitachi_hlink {
