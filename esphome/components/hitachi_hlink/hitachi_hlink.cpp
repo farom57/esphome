@@ -405,16 +405,16 @@ void HitachiClimate::print_state() {
     int len = descr[i].length;
     switch (len) {
       case 2:
-        ESP_LOGD(TAG, "%04X : %02X", descr[i].addr, state_[i].u8, " , ", descr[i].description);
+        ESP_LOGD(TAG, "%04X : %02X , %s", descr[i].addr, state_[i].u8, descr[i].description);
         break;
       case 4:
-        ESP_LOGD(TAG, "%04X : %04X", descr[i].addr, state_[i].u16, " , ", descr[i].description);
+        ESP_LOGD(TAG, "%04X : %04X , %s", descr[i].addr, state_[i].u16, descr[i].description);
         break;
       case 8:
-        ESP_LOGD(TAG, "%04X : %08X", descr[i].addr, state_[i].u32, " , ", descr[i].description);
+        ESP_LOGD(TAG, "%04X : %08X , %s", descr[i].addr, state_[i].u32, descr[i].description);
         break;
       case 20:
-        ESP_LOGD(TAG, "%04X : %s", descr[i].addr, state_[i].text, " , ", descr[i].description);
+        ESP_LOGD(TAG, "%04X : %s , %s", descr[i].addr, state_[i].text, descr[i].description);
         break;
     }
   }
