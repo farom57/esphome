@@ -400,21 +400,21 @@ void HitachiClimate::print_state() {
     ESP_LOGD(TAG, "Not yet ready");
     return;
   }
-  ESP_LOGD(TAG, "State:");
+  ESP_LOGV(TAG, "State:");
   for (int i = 0; i < N_PARAMS; i++) {
     int len = descr[i].length;
     switch (len) {
       case 2:
-        ESP_LOGD(TAG, "%04X : %02X \t%s", descr[i].addr, state_[i].u8, descr[i].description);
+        ESP_LOGV(TAG, "%04X : %02X \t%s", descr[i].addr, state_[i].u8, descr[i].description);
         break;
       case 4:
-        ESP_LOGD(TAG, "%04X : %04X \t%s", descr[i].addr, state_[i].u16, descr[i].description);
+        ESP_LOGV(TAG, "%04X : %04X \t%s", descr[i].addr, state_[i].u16, descr[i].description);
         break;
       case 8:
-        ESP_LOGD(TAG, "%04X : %08X \t%s", descr[i].addr, state_[i].u32, descr[i].description);
+        ESP_LOGV(TAG, "%04X : %08X \t%s", descr[i].addr, state_[i].u32, descr[i].description);
         break;
       case 20:
-        ESP_LOGD(TAG, "%04X : %s \t%s", descr[i].addr, state_[i].text, descr[i].description);
+        ESP_LOGV(TAG, "%04X : %s \t%s", descr[i].addr, state_[i].text, descr[i].description);
         break;
     }
   }
@@ -568,7 +568,7 @@ bool HitachiClimate::state2climate_() {
   if (state_[OUTDOOR].u8 < 50) {
     outside_temperature = state_[OUTDOOR].u8;
   } else if (state_[OUTDOOR].u8 == 126) {
-    ESP_LOGW(TAG, "Outdoor temperature not available");
+    ESP_LOGD(TAG, "Outdoor temperature not available");
   } else {
     ESP_LOGW(TAG, "Invalid outdoor temperature %d (0x%02X)", state_[OUTDOOR].u8, state_[OUTDOOR].u8);
     return false;
